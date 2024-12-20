@@ -37,7 +37,17 @@ export function HashMap() {
     // TODO: bucket growth
   }
 
-  return { set };
+  function get(key) {
+    const hashIndex = hash(key);
+    const bucket = buckets[hashIndex];
+    if (!bucket) {
+      return null;
+    }
+
+    return bucket.getValue(key);
+  }
+
+  return { set, get };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key

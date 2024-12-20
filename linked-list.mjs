@@ -30,6 +30,23 @@ function createLinkedList() {
     }
   }
 
+  function getValue(key) {
+    if (!head) {
+      return null;
+    }
+
+    let node = head;
+
+    while (node) {
+      if (node.key === key) {
+        return node.value;
+      }
+      node = node.nextNode;
+    }
+
+    return null;
+  }
+
   // for testing
   function toString() {
     if (!head) {
@@ -47,7 +64,7 @@ function createLinkedList() {
     return `${string} null`;
   }
 
-  return { insertNode, toString };
+  return { insertNode, getValue, toString };
 }
 
 export { createLinkedList };
