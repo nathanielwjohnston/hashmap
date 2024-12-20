@@ -40,14 +40,25 @@ export function HashMap() {
   function get(key) {
     const hashIndex = hash(key);
     const bucket = buckets[hashIndex];
-    if (!bucket) {
+    if (!bucket) return null;
+
+    const value = bucket.contains(key, true);
+    if (value) {
+      return value;
+    } else {
       return null;
     }
-
-    return bucket.getValue(key);
   }
 
-  return { set, get };
+  function has(key) {
+    const hashIndex = hash(key);
+    const bucket = buckets[hashIndex];
+    if (!bucket) return null;
+
+    return bucket.contains(key, false);
+  }
+
+  return { set, get, has };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key

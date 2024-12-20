@@ -30,21 +30,23 @@ function createLinkedList() {
     }
   }
 
-  function getValue(key) {
+  function contains(key, returnValue) {
     if (!head) {
-      return null;
+      return false;
     }
 
     let node = head;
 
     while (node) {
       if (node.key === key) {
-        return node.value;
+        if (returnValue) return node.value;
+
+        return true;
       }
       node = node.nextNode;
     }
 
-    return null;
+    return false;
   }
 
   // for testing
@@ -64,7 +66,7 @@ function createLinkedList() {
     return `${string} null`;
   }
 
-  return { insertNode, getValue, toString };
+  return { insertNode, contains, toString };
 }
 
 export { createLinkedList };
