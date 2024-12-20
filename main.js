@@ -2,4 +2,6 @@ import { HashMap } from "./hashmap.mjs";
 
 const hashmap = HashMap();
 
-console.log(hashmap.hash("a"));
+hashmap.set("Carla", "apple");
+hashmap.set("2", "orange");
+hashmap.set("9", "grape");
