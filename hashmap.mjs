@@ -66,7 +66,19 @@ export function HashMap() {
     return bucket.remove(key);
   }
 
-  return { set, get, has, remove };
+  function length() {
+    let keys = 0;
+
+    for (let bucket of buckets) {
+      if (bucket) {
+        keys += bucket.size();
+      }
+    }
+
+    return keys;
+  }
+
+  return { set, get, has, remove, length };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key

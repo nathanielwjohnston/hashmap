@@ -73,6 +73,17 @@ function createLinkedList() {
     return false;
   }
 
+  function size() {
+    let node = head;
+    let size = 0;
+    while (node) {
+      size++;
+      node = node.nextNode;
+    }
+
+    return size;
+  }
+
   // for testing
   function toString() {
     if (!head) {
@@ -90,7 +101,7 @@ function createLinkedList() {
     return `${string} null`;
   }
 
-  return { insertNode, contains, remove, toString };
+  return { insertNode, contains, remove, size, toString };
 }
 
 export { createLinkedList };
