@@ -49,6 +49,30 @@ function createLinkedList() {
     return false;
   }
 
+  function remove(key) {
+    if (!head) {
+      return false;
+    }
+
+    if (head.key === key) {
+      head = head.nextNode;
+      return true;
+    }
+
+    let node = head;
+    // Repeats until the second-to-last element
+    while (node.nextNode !== null) {
+      // check next node on current node
+      if (node.nextNode.key === key) {
+        node.nextNode = node.nextNode.nextNode;
+        return true;
+      }
+      node = node.nextNode;
+    }
+
+    return false;
+  }
+
   // for testing
   function toString() {
     if (!head) {
@@ -66,7 +90,7 @@ function createLinkedList() {
     return `${string} null`;
   }
 
-  return { insertNode, contains, toString };
+  return { insertNode, contains, remove, toString };
 }
 
 export { createLinkedList };

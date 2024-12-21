@@ -53,12 +53,20 @@ export function HashMap() {
   function has(key) {
     const hashIndex = hash(key);
     const bucket = buckets[hashIndex];
-    if (!bucket) return null;
+    if (!bucket) return false;
 
     return bucket.contains(key, false);
   }
 
-  return { set, get, has };
+  function remove(key) {
+    const hashIndex = hash(key);
+    const bucket = buckets[hashIndex];
+    if (!bucket) return false;
+
+    return bucket.remove(key);
+  }
+
+  return { set, get, has, remove };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key
