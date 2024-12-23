@@ -134,3 +134,7 @@ export function HashMap() {
 // if not found, it is added to the linked list
 // In the the case that there are no values, the key will be set to the head
 // of a new linked list in that bucket
+
+// keys, values, and entries are all very similar and could probably be
+// broken down into a function in linked lists that will feed nodes to them
+// to parse the information
