@@ -84,6 +84,10 @@ function createLinkedList() {
     return size;
   }
 
+  function getHead() {
+    return head;
+  }
+
   // for testing
   function toString() {
     if (!head) {
@@ -101,7 +105,7 @@ function createLinkedList() {
     return `${string} null`;
   }
 
-  return { insertNode, contains, remove, size, toString };
+  return { insertNode, contains, remove, size, toString, getHead };
 }
 
 export { createLinkedList };

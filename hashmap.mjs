@@ -82,7 +82,22 @@ export function HashMap() {
     buckets = new Array(capacity);
   }
 
-  return { set, get, has, remove, length, clear };
+  function keys() {
+    const keys = [];
+
+    for (let bucket of buckets) {
+      if (!bucket) continue;
+      let node = bucket.getHead();
+      while (node) {
+        keys.push(node.key);
+        node = node.nextNode;
+      }
+    }
+
+    return keys;
+  }
+
+  return { set, get, has, remove, length, clear, keys };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key
