@@ -78,7 +78,11 @@ export function HashMap() {
     return keys;
   }
 
-  return { set, get, has, remove, length };
+  function clear() {
+    buckets = new Array(capacity);
+  }
+
+  return { set, get, has, remove, length, clear };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key
