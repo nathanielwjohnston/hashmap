@@ -97,7 +97,22 @@ export function HashMap() {
     return keys;
   }
 
-  return { set, get, has, remove, length, clear, keys };
+  function values() {
+    const values = [];
+
+    for (let bucket of buckets) {
+      if (!bucket) continue;
+      let node = bucket.getHead();
+      while (node) {
+        values.push(node.value);
+        node = node.nextNode;
+      }
+    }
+
+    return values;
+  }
+
+  return { set, get, has, remove, length, clear, keys, values };
 }
 
 // go through linked list - if one exists - in the bucket, until either the key
