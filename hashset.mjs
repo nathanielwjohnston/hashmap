@@ -76,9 +76,7 @@ export function HashSet() {
 
   function checkLoad() {
     const entriesAmount = length();
-    console.log(`entries: ${entriesAmount}`);
     const targetEntriesAmount = capacity * loadFactor;
-    console.log(`target: ${targetEntriesAmount}`);
     if (entriesAmount > targetEntriesAmount) {
       return true;
     }
@@ -95,8 +93,6 @@ export function HashSet() {
     for (let entry of hashEntries) {
       set(entry);
     }
-
-    console.log("growth");
   }
 
   function set(key) {
@@ -113,8 +109,6 @@ export function HashSet() {
 
     buckets[hashIndex].insertNode(key);
 
-    console.log(hashIndex);
-    console.log(buckets[hashIndex].toString());
     // Bucket growth
     if (checkLoad()) growBuckets();
   }

@@ -88,23 +88,6 @@ function createLinkedList() {
     return head;
   }
 
-  // for testing
-  function toString() {
-    if (!head) {
-      return "null";
-    }
-
-    let node = head;
-    let string;
-    while (node) {
-      string = `${string ? string : ""} ( ${node.key}: ${node.value} ) ->`;
-
-      node = node.nextNode;
-    }
-
-    return `${string} null`;
-  }
-
   return { insertNode, contains, remove, size, toString, getHead };
 }
 

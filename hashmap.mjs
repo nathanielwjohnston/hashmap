@@ -110,9 +110,7 @@ export function HashMap() {
 
   function checkLoad() {
     const entriesAmount = length();
-    console.log(`entries: ${entriesAmount}`);
     const targetEntriesAmount = capacity * loadFactor;
-    console.log(`target: ${targetEntriesAmount}`);
     if (entriesAmount > targetEntriesAmount) {
       return true;
     }
@@ -129,8 +127,6 @@ export function HashMap() {
     for (let entry of hashEntries) {
       set(entry[0], entry[1]);
     }
-
-    console.log("growth");
   }
 
   function set(key, value) {
@@ -147,8 +143,6 @@ export function HashMap() {
 
     buckets[hashIndex].insertNode(key, value);
 
-    console.log(hashIndex);
-    console.log(buckets[hashIndex].toString());
     // Bucket growth
     if (checkLoad()) growBuckets();
   }
