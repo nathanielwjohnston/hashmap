@@ -2,7 +2,7 @@ import { createLinkedList } from "./linked-list.mjs";
 
 export function HashMap() {
   let capacity = 16;
-  let loadFactor = 0.8;
+  let loadFactor = 0.75;
   let buckets = new Array(capacity);
 
   // Based on the implementation from the odin project example
@@ -16,25 +16,6 @@ export function HashMap() {
     }
 
     return hashCode;
-  }
-
-  function set(key, value) {
-    // hash the key
-    const hashIndex = hash(key);
-    // go to bucket
-    if (hashIndex < 0 || hashIndex >= buckets.length) {
-      throw new Error("Trying to access index out of bounds");
-    }
-
-    if (!buckets[hashIndex]) {
-      buckets[hashIndex] = createLinkedList();
-    }
-
-    buckets[hashIndex].insertNode(key, value);
-
-    console.log(hashIndex);
-    console.log(buckets[hashIndex].toString());
-    // TODO: bucket growth
   }
 
   function get(key) {
@@ -126,6 +107,52 @@ export function HashMap() {
 
     return entries;
   }
+
+  function checkLoad() {
+    const entriesAmount = length();
+    console.log(`entries: ${entriesAmount}`);
+    const targetEntriesAmount = capacity * loadFactor;
+    console.log(`target: ${targetEntriesAmount}`);
+    if (entriesAmount > targetEntriesAmount) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function growBuckets() {
+    capacity *= 2;
+
+    const hashEntries = entries();
+    buckets = new Array(capacity);
+
+    for (let entry of hashEntries) {
+      set(entry[0], entry[1]);
+    }
+
+    console.log("growth");
+  }
+
+  function set(key, value) {
+    // hash the key
+    const hashIndex = hash(key);
+    // go to bucket
+    if (hashIndex < 0 || hashIndex >= buckets.length) {
+      throw new Error("Trying to access index out of bounds");
+    }
+
+    if (!buckets[hashIndex]) {
+      buckets[hashIndex] = createLinkedList();
+    }
+
+    buckets[hashIndex].insertNode(key, value);
+
+    console.log(hashIndex);
+    console.log(buckets[hashIndex].toString());
+    // Bucket growth
+    if (checkLoad()) growBuckets();
+  }
+
   return { set, get, has, remove, length, clear, keys, values, entries };
 }
 

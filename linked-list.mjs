@@ -5,7 +5,7 @@ function createNode({ key = null, value = null, nextNode = null } = {}) {
 function createLinkedList() {
   let head = null;
 
-  function insertNode(newKey, newValue) {
+  function insertNode(newKey, newValue = null) {
     const newNode = createNode({ key: newKey, value: newValue });
     if (!head) {
       head = newNode;
